@@ -1,7 +1,8 @@
-import 'dotenv/config'; // adiciona em process.env
+import 'dotenv/config'; // adiciona env vars em process.env
 
 import express from 'express';
 import path from 'path';
+import cors from 'cors';
 import Youch from 'youch';
 import * as Sentry from '@sentry/node';
 import 'express-async-errors';
@@ -21,6 +22,7 @@ class App {
 
     middlewares() {
         this.server.use(Sentry.Handlers.requestHandler());
+        this.server.use(cors());
         this.server.use(express.json());
         this.server.use(
             '/files',
